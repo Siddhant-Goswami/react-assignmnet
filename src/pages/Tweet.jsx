@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TweetInput from "../components/Tweet/TweetInput";
 
 function Tweet() {

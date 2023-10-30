@@ -1,9 +1,10 @@
 import { useContext } from "react";
 import Button from "../Button";
 import { AuthContext } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 function LoginMain() {
-  const { setIsLoggedIn } = useContext(AuthContext);
+  const navigate = useNavigate();
   return (
     <main className="flex items-center w-full h-screen">
       <section className="flex flex-col w-full gap-10 px-7">
@@ -31,15 +32,14 @@ function LoginMain() {
           <p className="text-base font-medium leading-normal text-neutral-50">
             Already have an account?
           </p>
-          <a href="#">
-            <Button
-              variant="outline"
-              size="xl"
-              onClick={() => setIsLoggedIn(true)}
-            >
-              Sign in
-            </Button>
-          </a>
+
+          <Button
+            variant="outline"
+            size="xl"
+            onClick={() => navigate("/tweet")}
+          >
+            Sign in
+          </Button>
         </section>
       </section>
     </main>
