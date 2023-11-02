@@ -1,10 +1,21 @@
 import { useContext } from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from "react-router-dom";
 
 import Login from "./pages/Login";
 import Tweet from "./pages/Tweet";
-import { AuthProvider } from "./context/AuthProvider";
-import { AuthContext } from "./context/AuthContext";
+import { AuthProvider, useAuth } from "./context/AuthContext";
+
+// protected route
+// public route
+
+const ProtectedRoute = ({ children }) => {
+  const { authToken } = useAuth();
+  return authToken ? children : <Navigate to="/login" />;
+};
 
 const router = createBrowserRouter([
   {
@@ -17,7 +28,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/tweet",
-    element: <Tweet />,
+    element: (
+      <ProtectedRoute>
+        <Tweet />
+      </ProtectedRoute>
+    ),
   },
 ]);
 

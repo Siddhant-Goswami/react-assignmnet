@@ -3,8 +3,14 @@ import Button from "../Button";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-function LoginMain() {
+function LoginMain({ onSignIn }) {
   const navigate = useNavigate();
+
+  const handler = async () => {
+    const response = await onSignIn();
+    console.log("response", response);
+    // navigate("/tweet");
+  };
   return (
     <main className="flex items-center w-full h-screen">
       <section className="flex flex-col w-full gap-10 px-7">
@@ -33,11 +39,7 @@ function LoginMain() {
             Already have an account?
           </p>
 
-          <Button
-            variant="outline"
-            size="xl"
-            onClick={() => navigate("/tweet")}
-          >
+          <Button variant="outline" size="xl" onClick={handler}>
             Sign in
           </Button>
         </section>
